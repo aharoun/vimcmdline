@@ -5,11 +5,14 @@ endif
 
 function! MatlabSourceLines(lines)
     call writefile(a:lines, g:cmdline_tmp_dir . "/lines.m")
-    call VimCmdLineSendCmd('run(''lines.m'');')
+    "avoid calling lines.m from absolute path, othewise matlab path changes. When run matlab, add `/tmp/` to the path
+    call VimCmdLineSendCmd('type lines.m; run(''lines.m'');')
 endfunction
 
 let b:cmdline_nl = "\n"
-let b:cmdline_app = "matlab" "let cmdline_app['matlab'] = 'matlab -nosplash -nodesktop' is added to .vimcr
+" let cmdline_app['matlab'] = 'matlab -nosplash -nodesktop -r addpath(''/tmp/'')' is added to .vimrc with double quote
+" around addpath...
+let b:cmdline_app = "matlab"
 let b:cmdline_quit_cmd = "exit"
 let b:cmdline_source_fun = function("MatlabSourceLines")
 let b:cmdline_send_empty = 0
