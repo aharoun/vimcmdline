@@ -5,7 +5,7 @@ endif
 
 function! MatlabSourceLines(lines)
     call writefile(a:lines, g:cmdline_tmp_dir . "/lines.m")
-    call VimCmdLineSendCmd('run(''/lines.m'');')
+    call VimCmdLineSendCmd('run(''lines.m'');')
 endfunction
 
 let b:cmdline_nl = "\n"
