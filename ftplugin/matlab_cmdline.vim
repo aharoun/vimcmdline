@@ -6,7 +6,7 @@ endif
 function! MatlabSourceLines(lines)
     call writefile(a:lines, g:cmdline_tmp_dir . "/lines.m")
     "avoid calling lines.m from absolute path, othewise matlab path changes. When run matlab, add `/tmp/` to the path
-    call VimCmdLineSendCmd('type lines.m; run(''lines.m'');')
+    call VimCmdLineSendCmd('clc; type lines.m; run(''lines.m'');')
 endfunction
 
 let b:cmdline_nl = "\n"
